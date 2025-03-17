@@ -18,7 +18,7 @@ export function Header() {
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList>
               <NavigationMenuItem>
-                <Link href="/#market" legacyBehavior passHref>
+                <Link href="/market" legacyBehavior passHref>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                     Market
                   </NavigationMenuLink>
