@@ -11,7 +11,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           {/* Column 1 - About */}
           <div className="space-y-4">
-            <h3 className="text-lg font-medium text-foreground">💸&nbsp; SimpleStock</h3>
+            <h3 className="text-lg font-medium text-foreground">SimpleStock</h3>
             <p className="text-sm text-muted-foreground">
               Providing real-time market data and financial insights to help you build generational wealth.
             </p>
