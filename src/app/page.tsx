@@ -71,7 +71,7 @@ export default function Home() {
             <div className="container px-4 md:px-6 mx-auto">
               <div className="flex justify-center items-center py-20 bg-muted/30 rounded-lg border border-border/20">
                 <p className="text-muted-foreground text-lg">
-                  No results found for "{truncateQuery(searchQuery)}"
+                  No results found for &quot;{truncateQuery(searchQuery)}&quot;
                   <br />
                   Try a different search term.
                 </p>

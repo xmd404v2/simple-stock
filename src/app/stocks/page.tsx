@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { StockCard } from "@/components/StockCard";
 import { NewsCard } from "@/components/NewsCard";
-import { mockStocks, mockNews } from "@/lib/mock-data";
+import { mockNews } from "@/lib/mockData";
 import Link from "next/link";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -395,10 +395,15 @@ export default function StocksPage() {
                     </div>
                   </div>
                   
-                  <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-                    {filteredStocks.map((stock, index) => (
-                      <StockCard key={`search-${stock.id}-${index}`} stock={stock} />
-                    ))}
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {filteredStocks.map((stock, index) => (
+                        <StockCard key={`search-${stock.id}-${index}`} stock={stock} />
+                      ))}
+                    </div>
+                    {filteredStocks.length === 0 && (
+                      <p className="text-muted-foreground text-center py-8">No stocks found matching &quot;{searchQuery}&quot;</p>
+                    )}
                   </div>
                 </div>
               </section>
