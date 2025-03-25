@@ -4,9 +4,13 @@ import { getStockDetails } from '@/lib/mock-data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { notFound } from 'next/navigation';
 
-export default function StockDetailPage({ params }: { params: { id: string } }) {
-  // Access id directly without awaiting
-  const stock = getStockDetails(params.id);
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function StockDetailPage({ params }: PageProps) {
+  const { id } = await params;
+  const stock = getStockDetails(id);
   
   if (!stock) {
     notFound();
@@ -24,20 +28,24 @@ export default function StockDetailPage({ params }: { params: { id: string } }) 
         additionalInfo={(
           <>
             <div className="flex flex-col p-2 rounded-md bg-card/50">
+              <span className="text-sm text-muted-foreground mb-1">Market Cap</span>
+              <span className="font-medium text-foreground">
+                ${stock.volume ? (stock.price * stock.volume).toLocaleString() : 'N/A'}
+              </span>
+            </div>
+            <div className="flex flex-col p-2 rounded-md bg-card/50">
               <span className="text-sm text-muted-foreground mb-1">Volume</span>
               <span className="font-medium text-foreground">{stock.volume?.toLocaleString() || 'N/A'}</span>
             </div>
             <div className="flex flex-col p-2 rounded-md bg-card/50">
-              <span className="text-sm text-muted-foreground mb-1">Day Range</span>
-              <span className="font-medium text-foreground">${(stock.price * 0.98).toFixed(2)} - ${(stock.price * 1.02).toFixed(2)}</span>
+              <span className="text-sm text-muted-foreground mb-1">P/E Ratio</span>
+              <span className="font-medium text-foreground">{(stock.price / (stock.price * 0.05)).toFixed(2)}</span>
             </div>
             <div className="flex flex-col p-2 rounded-md bg-card/50">
-              <span className="text-sm text-muted-foreground mb-1">52 Week Range</span>
-              <span className="font-medium text-foreground">${(stock.price * 0.8).toFixed(2)} - ${(stock.price * 1.2).toFixed(2)}</span>
-            </div>
-            <div className="flex flex-col p-2 rounded-md bg-card/50">
-              <span className="text-sm text-muted-foreground mb-1">Market Cap</span>
-              <span className="font-medium text-foreground">${(stock.price * stock.volume * 10).toLocaleString()}</span>
+              <span className="text-sm text-muted-foreground mb-1">52-Week Range</span>
+              <span className="font-medium text-foreground">
+                ${(stock.price * 0.8).toFixed(2)} - ${(stock.price * 1.2).toFixed(2)}
+              </span>
             </div>
           </>
         )}
@@ -58,15 +66,17 @@ export default function StockDetailPage({ params }: { params: { id: string } }) 
                 <div className="space-y-4">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Technical Rating</span>
-                    <span className="font-medium text-foreground">Strong Buy</span>
+                    <span className="font-medium text-foreground">{stock.change > 0 ? 'Buy' : 'Sell'}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Moving Averages</span>
-                    <span className="font-medium text-green-500">Buy</span>
+                    <span className={`font-medium ${stock.change > 0 ? 'text-green-500' : 'text-red-500'}`}>
+                      {stock.change > 0 ? 'Buy' : 'Sell'}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Oscillators</span>
-                    <span className="font-medium text-green-500">Buy</span>
+                    <span className="font-medium text-yellow-500">Neutral</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Support Level</span>

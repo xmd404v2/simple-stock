@@ -350,7 +350,7 @@ export default function CryptoPage() {
             <div className="container px-4 md:px-6 mx-auto">
               <div className="flex justify-center items-center py-20 bg-muted/30 rounded-lg border border-border/20">
                 <p className="text-muted-foreground text-lg">
-                  No results found for "{truncateQuery(searchQuery)}"
+                  No results found for &quot;{truncateQuery(searchQuery)}&quot;
                   <br />
                   Try a different search term.
                 </p>
@@ -391,7 +391,7 @@ export default function CryptoPage() {
                   <div className="flex flex-col md:flex-row justify-between items-baseline mb-6">
                     <div>
                       <h2 className="text-2xl font-bold tracking-tight text-foreground">Search Results</h2>
-                      <p className="text-muted-foreground">Found {filteredCrypto.length} cryptocurrencies matching "{truncateQuery(searchQuery)}"</p>
+                      <p className="text-muted-foreground">Found {filteredCrypto.length} cryptocurrencies matching &quot;{truncateQuery(searchQuery)}&quot;</p>
                     </div>
                   </div>
                   

@@ -4,9 +4,13 @@ import { getForexDetails } from '@/lib/mock-data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { notFound } from 'next/navigation';
 
-export default function ForexDetailPage({ params }: { params: { id: string } }) {
-  // Access params.id directly without awaiting
-  const forex = getForexDetails(params.id);
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function ForexDetailPage({ params }: PageProps) {
+  const { id } = await params;
+  const forex = getForexDetails(id);
   
   if (!forex) {
     notFound();
@@ -32,12 +36,16 @@ export default function ForexDetailPage({ params }: { params: { id: string } }) 
               <span className="font-medium text-foreground">{forex.quoteCurrency}</span>
             </div>
             <div className="flex flex-col p-2 rounded-md bg-card/50">
-              <span className="text-sm text-muted-foreground mb-1">Day Range</span>
-              <span className="font-medium text-foreground">{(forex.rate - forex.rate * 0.003).toFixed(4)} - {(forex.rate + forex.rate * 0.003).toFixed(4)}</span>
+              <span className="text-sm text-muted-foreground mb-1">Daily Range</span>
+              <span className="font-medium text-foreground">
+                {(forex.rate * 0.99).toFixed(4)} - {(forex.rate * 1.01).toFixed(4)}
+              </span>
             </div>
             <div className="flex flex-col p-2 rounded-md bg-card/50">
-              <span className="text-sm text-muted-foreground mb-1">52 Week Range</span>
-              <span className="font-medium text-foreground">{(forex.rate - forex.rate * 0.05).toFixed(4)} - {(forex.rate + forex.rate * 0.05).toFixed(4)}</span>
+              <span className="text-sm text-muted-foreground mb-1">52-Week Range</span>
+              <span className="font-medium text-foreground">
+                {(forex.rate * 0.95).toFixed(4)} - {(forex.rate * 1.05).toFixed(4)}
+              </span>
             </div>
           </>
         )}
@@ -72,11 +80,11 @@ export default function ForexDetailPage({ params }: { params: { id: string } }) 
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Support Level</span>
-                    <span className="font-medium text-foreground">{(forex.rate - forex.rate * 0.005).toFixed(4)}</span>
+                    <span className="font-medium text-foreground">{(forex.rate * 0.995).toFixed(4)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Resistance Level</span>
-                    <span className="font-medium text-foreground">{(forex.rate + forex.rate * 0.005).toFixed(4)}</span>
+                    <span className="font-medium text-foreground">{(forex.rate * 1.005).toFixed(4)}</span>
                   </div>
                 </div>
               </CardContent>

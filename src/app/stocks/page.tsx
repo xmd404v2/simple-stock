@@ -350,7 +350,7 @@ export default function StocksPage() {
             <div className="container px-4 md:px-6 mx-auto">
               <div className="flex justify-center items-center py-20 bg-muted/30 rounded-lg border border-border/20">
                 <p className="text-muted-foreground text-lg">
-                  No results found for "{truncateQuery(searchQuery)}"
+                  No results found for &quot;{truncateQuery(searchQuery)}&quot;
                   <br />
                   Try a different search term.
                 </p>
@@ -374,7 +374,7 @@ export default function StocksPage() {
                 
                 <ScrollArea className="w-full -mx-1 px-1">
                   <div className="flex space-x-4 pb-4 pt-1">
-                    {filteredNews.slice(0, 8).map((news, i) => (
+                    {filteredNews.slice(0, 8).map((news) => (
                       <div key={news.id} className="shrink-0">
                         <NewsCard news={news} />
                       </div>
@@ -391,7 +391,7 @@ export default function StocksPage() {
                   <div className="flex flex-col md:flex-row justify-between items-baseline mb-6">
                     <div>
                       <h2 className="text-2xl font-bold tracking-tight text-foreground">Search Results</h2>
-                      <p className="text-muted-foreground">Found {filteredStocks.length} stocks matching "{truncateQuery(searchQuery)}"</p>
+                      <p className="text-muted-foreground">Found {filteredStocks.length} stocks matching &quot;{truncateQuery(searchQuery)}&quot;</p>
                     </div>
                   </div>
                   

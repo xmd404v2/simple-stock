@@ -4,9 +4,13 @@ import { getCryptoDetails } from '@/lib/mock-data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { notFound } from 'next/navigation';
 
-export default function CryptoDetailPage({ params }: { params: { id: string } }) {
-  // Access id directly without awaiting
-  const crypto = getCryptoDetails(params.id);
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function CryptoDetailPage({ params }: PageProps) {
+  const { id } = await params;
+  const crypto = await getCryptoDetails(id);
   
   if (!crypto) {
     notFound();
@@ -33,7 +37,9 @@ export default function CryptoDetailPage({ params }: { params: { id: string } })
             </div>
             <div className="flex flex-col p-2 rounded-md bg-card/50">
               <span className="text-sm text-muted-foreground mb-1">Circulating Supply</span>
-              <span className="font-medium text-foreground">{(crypto.marketCap / crypto.price).toLocaleString()} {crypto.symbol}</span>
+              <span className="font-medium text-foreground">
+                {crypto.marketCap ? `${(crypto.marketCap / crypto.price).toLocaleString()} ${crypto.symbol}` : 'N/A'}
+              </span>
             </div>
             <div className="flex flex-col p-2 rounded-md bg-card/50">
               <span className="text-sm text-muted-foreground mb-1">All-Time High</span>

@@ -481,8 +481,13 @@ export function getStockDetails(id: string) {
   return mockStocks.find(stock => stock.id === id);
 }
 
-export function getCryptoDetails(id: string) {
-  return mockCryptos.find(crypto => crypto.id === id);
+export async function getCryptoDetails(id: string) {
+  const crypto = mockCryptos.find(c => c.id === id);
+  if (!crypto) return null;
+  return {
+    ...crypto,
+    marketCap: crypto.volume ? crypto.price * crypto.volume * 10 : undefined,
+  };
 }
 
 export function getForexDetails(id: string) {

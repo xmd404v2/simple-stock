@@ -9,7 +9,7 @@ export function Header() {
         {/* Logo left */}
         <div className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="font-bold text-xl text-foreground">SimpleStock</span>
+            <span className="font-bold text-xl text-foreground">💸&nbsp;SimpleStock</span>
           </Link>
         </div>
         
@@ -18,7 +18,7 @@ export function Header() {
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList>
               <NavigationMenuItem>
-                <Link href="/" legacyBehavior passHref>
+                <Link href="/#market" legacyBehavior passHref>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                     Market
                   </NavigationMenuLink>
