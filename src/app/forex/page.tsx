@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { StockCard } from "@/components/StockCard";
 import { NewsCard } from "@/components/NewsCard";
-import { mockNews } from "@/lib/mockData";
+import { mockNews } from "@/lib/mock-data";
 import Link from "next/link";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
