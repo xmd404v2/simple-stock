@@ -9,7 +9,7 @@ export function Header() {
         {/* Logo left */}
         <div className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="font-bold text-xl text-foreground">💸&nbsp;SimpleStock</span>
+            <span className="font-bold text-xl text-foreground">SimpleStock</span>
           </Link>
         </div>
         
